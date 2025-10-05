@@ -1,3 +1,8 @@
+# --- Installation ---
+# Make sure you have installed all the required libraries.
+# Open your terminal and run the following command:
+# pip install streamlit google-generativeai langchain-google-genai langgraph langchain PyPDF2
+
 import streamlit as st
 import os
 import re
