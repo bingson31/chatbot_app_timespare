@@ -4,7 +4,6 @@ import re
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
 from langchain_core.tools import tool
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langgraph.prebuilt import create_tool_executor
 from langgraph.graph import StateGraph, END
 from typing import TypedDict, Annotated, List
 import PyPDF2
@@ -175,9 +174,8 @@ def engine_breakdown_advisor(component_or_issue: str) -> str:
 class AgentState(TypedDict):
     messages: Annotated[List, lambda x, y: x + y]
 
-# Initialize tools and model
+# Initialize tools
 tools = [frt_estimator, engine_breakdown_advisor]
-tool_executor = create_tool_executor(tools)
 
 def get_model(api_key):
     """Initializes the ChatGoogleGenerativeAI model with the provided API key."""
@@ -292,3 +290,4 @@ if prompt := st.chat_input("Ask a question like 'How long for a CVT overhaul?'")
             st.session_state.messages.append(response_message)
             st.chat_message("assistant").write(response_message.content)
             st.rerun()
+
