@@ -11,7 +11,14 @@ from langchain_core.tools import tool
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.graph import StateGraph, END
 from typing import TypedDict, Annotated, List
-import PyPDF2
+
+try:
+    import PyPDF2
+except ImportError:
+    st.error("Required library `PyPDF2` is not installed. Please run the following command in your terminal to install it:")
+    st.code("pip install PyPDF2")
+    st.stop()
+
 
 # --- PDF Parsing and Data Extraction ---
 
